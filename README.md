@@ -29,9 +29,16 @@ cloudinary = {
     api_secret: "api_secret",
 }
 
-Refile.cache = Refile::Cloudinary.new({**cloudinary }, max_size: nil)
-Refile.store = Refile::Cloudinary.new({**cloudinary }, max_size: nil)
+Refile.cache = Refile::Cloudinary.new({ **cloudinary })
+Refile.store = Refile::Cloudinary.new({ **cloudinary })
+
 ```
+#Max size of your file
+If you want set max_size you can change this line:
+```rb
+Refile.cache = Refile::Cloudinary.new({ **cloudinary }, max_size: value_max_size)
+Refile.store = Refile::Cloudinary.new({ **cloudinary }, max_size: value_max_size)
+``` 
 
 after this, restart your server and you can see that your cloudinary receive your file that you upload.
 

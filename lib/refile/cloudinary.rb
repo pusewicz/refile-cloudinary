@@ -24,7 +24,7 @@ module Refile
     # @param [String] cloud_name The Cloudinary cloud name
     # @param [String] api_key The Cloudinary api key
     # @param [String] api_secret The Cloudinary api secret
-    def initialize(auth, max_size: 100)
+    def initialize(auth, max_size: 10_485_760)
       @max_size = max_size
       @auth = auth
     end
