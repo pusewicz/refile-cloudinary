@@ -1,29 +1,35 @@
 # Refile::Cloudinary
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/refile/cloudinary`. To experiment with that code, run `bin/console` for an interactive prompt.
-
-TODO: Delete this and the text above, and describe your gem
-
+Refile Cloudinary is a extension to your Refile, with this gem you can do upload to cloudinary with Refile with litte configurations.
 ## Installation
 
-Add this line to your application's Gemfile:
+Add this lines to your application's Gemfile:
 
 ```ruby
-gem 'refile-cloudinary'
+gem 'refile', require: ["refile/rails"], :path => 'gems/refile'
+gem 'cloudinary'
+gem 'refile-cloudinary', :git => 'git://github.com/pusewicz/refile-cloudinary.git'
 ```
 
 And then execute:
-
-    $ bundle
-
-Or install it yourself as:
-
-    $ gem install refile-cloudinary
-
+```rb
+bundle install
+```
 ## Usage
+If your not have your Refile properly configured follow this link: https://github.com/refile/refile, then so to use this gem you have to configure your config/initializer in your rails application:
+```rb
+require "refile/cloudinary"
 
-TODO: Write usage instructions here
+cloudinary = {
+    cloud_name: "cloud_name",
+    api_key: "api_key",
+    api_secret: "api_secret",
+}
 
+Refile.cache = Refile::Cloudinary.new({**cloudinary }, max_size: nil)
+Refile.store = Refile::Cloudinary.new({**cloudinary }, max_size: nil)
+```
+after this, restart your server and you can see that your cloudinary receive your file that you upload.
 ## Development
 
 After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake spec` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
@@ -32,5 +38,5 @@ To install this gem onto your local machine, run `bundle exec rake install`. To 
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/refile-cloudinary.
+Bug reports and pull requests are welcome on GitHub at https://github.com/pusewicz/refile-cloudinary/issues.
 
