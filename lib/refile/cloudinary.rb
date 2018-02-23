@@ -7,7 +7,7 @@ module Refile
   # A refile backend which stores files in Cloudinary
   #
   # @example
-  #   backend = Refile::Backend::Cloudinary.new(
+  #   backend = Refile::Cloudinary.new(
   #     cloud_name: "hfkkd49r3",
   #     api_key: "some-key",
   #     api_secret: "some-secret"
