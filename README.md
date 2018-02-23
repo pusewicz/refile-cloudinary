@@ -1,22 +1,39 @@
 # Refile::Cloudinary
 
-This gem adds Cloudinary as storage backend to Refile.
+This gem adds [Cloudinary](https://cloudinary.com) as storage backend to Refile.
 
 ## Installation
 
 Add this line to your application's Gemfile:
 
 ```ruby
-gem 'refile-cloudinary'
+gem 'refile-cloudinary', github: 'pusewicz/refile-cloudinary'
 ```
 
 And then execute:
 
-    $ bundle
+```rb
+bundle install
+```
 
-Or install it yourself as:
+## Usage
 
-    $ gem install refile-cloudinary
+If your not have your Refile properly configured follow this link: https://github.com/refile/refile, then so to use this gem you have to configure your config/initializer in your rails application:
+
+```rb
+require "refile/cloudinary"
+
+cloudinary = {
+    cloud_name: "cloud_name",
+    api_key: "api_key",
+    api_secret: "api_secret",
+}
+
+Refile.cache = Refile::Cloudinary.new({**cloudinary }, max_size: nil)
+Refile.store = Refile::Cloudinary.new({**cloudinary }, max_size: nil)
+```
+
+after this, restart your server and you can see that your cloudinary receive your file that you upload.
 
 ## Development
 
@@ -27,4 +44,3 @@ To install this gem onto your local machine, run `bundle exec rake install`. To 
 ## Contributing
 
 Bug reports and pull requests are welcome on GitHub at https://github.com/pusewicz/refile-cloudinary.
-
