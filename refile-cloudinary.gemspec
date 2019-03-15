@@ -31,7 +31,7 @@ Gem::Specification.new do |spec|
 
   spec.add_dependency             "cloudinary", "~> 1.8.3 "
   spec.add_dependency             "refile", "~> 0.6.2"
-  spec.add_development_dependency "bundler", "~> 2.04"
+  spec.add_development_dependency "bundler", "~> 1.13"
   spec.add_development_dependency "rake", "~> 10.0"
   spec.add_development_dependency "rspec", "~> 3.0"
 end
