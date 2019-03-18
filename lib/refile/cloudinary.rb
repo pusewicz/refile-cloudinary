@@ -1,7 +1,7 @@
-require "open-uri"
-require "cloudinary"
-require "refile"
-require "refile/cloudinary/version"
+require 'open-uri'
+require 'cloudinary'
+require 'refile'
+require 'refile/cloudinary/version'
 
 module Refile
   # A refile backend which stores files in Cloudinary
@@ -38,9 +38,11 @@ module Refile
       file.binmode
       file.write(uploadable.read)
       file.close
-
-      upload = ::Cloudinary::Uploader.upload(file.path, @auth.merge({tags: file.size}))
-      Refile::File.new(self, upload["public_id"])
+      upload = ::Cloudinary::Uploader.upload(
+        file.path,
+        @auth.merge(tags: file.size)
+      )
+      Refile::File.new(self, upload['public_id'])
     end
 
     # Get a file from this backend.
@@ -83,7 +85,7 @@ module Refile
     # @return [String] The file's contents
     verify_id def read(id)
       contents = ::Cloudinary::Downloader.download(id, @auth)
-      contents == "" ? nil : contents
+      contents == '' ? nil : contents
     end
 
     # Return the size in bytes of the uploaded file.
@@ -92,7 +94,7 @@ module Refile
     # @return [Integer] The file's size
     verify_id def size(id)
       resource = object(id)
-      resource ? resource["bytes"] : nil
+      resource ? resource['bytes'] : nil
     end
 
     # Return whether the file with the given id exists in this backend.
@@ -100,12 +102,10 @@ module Refile
     # @param [String] id The id of the file
     # @return [Boolean]
     verify_id def exists?(id)
-      begin
-        ::Cloudinary::Api.resource(id, @auth)
-        true
-      rescue ::Cloudinary::Api::NotFound
-        false
-      end
+      ::Cloudinary::Api.resource(id, @auth)
+      true
+    rescue ::Cloudinary::Api::NotFound
+      false
     end
 
     # Remove all files in this backend. You must confirm the deletion by
@@ -122,11 +122,9 @@ module Refile
     end
 
     verify_id def object(id)
-      begin
-        ::Cloudinary::Api.resource(id, @auth)
-      rescue ::Cloudinary::Api::NotFound
-        nil
-      end
+      ::Cloudinary::Api.resource(id, @auth)
+    rescue ::Cloudinary::Api::NotFound
+      nil
     end
   end
 end
